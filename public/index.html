@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en" ng-app="initiativeTracker">
+<head>
+  <meta charset="utf-8">
+
+  <title>Roll for Initiative!</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/app.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+  <script src="js/controllers.js"></script>
+
+</head>
+<body ng-controller="BattleCtrl">
+
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-md-6">
+        Choose Battle:
+        <select ng-model="battle" ng-change="battleChanged(battle)">
+          <option ng-repeat="b in battles">{{b}}</option>
+        </select>
+      </div>
+      <div class="col-md6">
+        <button ng-click="addBattle(new_battle)">Add Battle</button>
+        <input ng-model="new_battle">
+      </div>
+    </div>
+
+    <div class="row">
+      Add Character to {{battle}}
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        Name:<input ng-model="new_name">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        Race:
+        <select ng-model="new_race">
+          <option value="Dragonborn">Dragonborn</option>
+          <option value="Drow">Drow</option>
+          <option value="Dwarf">Dwarf</option>
+          <option value="Elf">Elf</option>
+          <option value="Gnome">Gnome</option>
+          <option value="Halfelf">Half-elf</option>
+          <option value="Halforc">Half-orc</option>
+          <option value="Halfling">Halfling</option>
+          <option value="Human">Human</option>
+          <option value="Tiefling">Tiefling</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        Class:
+        <select ng-model="new_class">
+          <option value="Barbarian">Barbarian</option>
+          <option value="Bard">Bard</option>
+          <option value="Cleric">Cleric</option>
+          <option value="Druid">Druid</option>
+          <option value="Fighter">Fighter</option>
+          <option value="Monk">Monk</option>
+          <option value="Paladin">Paladin</option>
+          <option value="Ranger">Ranger</option>
+          <option value="Rogue">Rogue</option>
+          <option value="Sorcerer">Sorcerer</option>
+          <option value="Warlock">Warlock</option>
+          <option value="Wizard">Wizard</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        AC:<input type="number" ng-model="new_ac">
+      </div>
+      <div class="col-md-4">
+        <button ng-click="addCharacter(battles, battle, new_name, new_race, new_class, new_ac)">Add Character</button>
+      </div>
+      <div class="col-md-2">
+        <button ng-click="sortByInitiative(combatants)">Sort</button>
+      </div>
+      <div class="col-md-2">
+        <button ng-click="nextInLine(combatants)">Next</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="combatants">
+          <li ng-repeat="combatant in combatants" class="thumbnail">
+            <img ng-src="http://bbsimg.ngfiles.com/1/25479000/ngbbs5525c24980fe4.jpg" class="thumb">
+            <p>{{combatant.name}} - {{combatant.race}} - {{combatant.class}}</p>
+            <p>AC: {{combatant.ac}}</p>
+            <p>Initiative: <input ng-model="combatant.initiative"></p>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
